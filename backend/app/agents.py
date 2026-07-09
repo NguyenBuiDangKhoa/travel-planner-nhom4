@@ -40,8 +40,7 @@ def call_flight_agent(origin: str, destination: str, start_date: str, end_date: 
         generation_config={
             "response_mime_type": "application/json",
             "response_schema": FlightAgentResponse,
-            "max_output_tokens": 2048,
-            "temperature": 0.2
+            "max_output_tokens": 2048
         }
     )
     
@@ -79,8 +78,7 @@ def call_hotel_agent(destination: str, duration_days: int, budget: float, prefer
         generation_config={
             "response_mime_type": "application/json",
             "response_schema": HotelAgentResponse,
-            "max_output_tokens": 2048,
-            "temperature": 0.2
+            "max_output_tokens": 2048
         }
     )
     
@@ -115,8 +113,7 @@ def call_weather_agent(destination: str, start_date: str, duration_days: int) ->
         generation_config={
             "response_mime_type": "application/json",
             "response_schema": WeatherAgentResponse,
-            "max_output_tokens": 2048,
-            "temperature": 0.2
+            "max_output_tokens": 2048
         }
     )
     
@@ -136,10 +133,10 @@ class Activity(BaseModel):
 class DailyItinerary(BaseModel):
     day: int = Field(description="Ngày thứ mấy (1, 2, 3...)")
     title: str = Field(description="Tiêu đề chính của ngày này (VD: Khám phá Trung tâm & Cafe lãng mạn)")
-    morning: List[Activity] = Field(default=[], description="Danh sách hoạt động buổi sáng")
-    afternoon: List[Activity] = Field(default=[], description="Danh sách hoạt động buổi chiều")
-    evening: List[Activity] = Field(default=[], description="Danh sách hoạt động buổi tối")
-    route_optimization: str = Field(default="Tự do di chuyển trong ngày", description="Giải thích ngắn gọn cách tối ưu hóa tuyến đường di chuyển trong ngày (VD: Đi các điểm cùng hướng phía Bắc để tránh đi ngược đường)")
+    morning: List[Activity] = Field(description="Danh sách hoạt động buổi sáng")
+    afternoon: List[Activity] = Field(description="Danh sách hoạt động buổi chiều")
+    evening: List[Activity] = Field(description="Danh sách hoạt động buổi tối")
+    route_optimization: str = Field(description="Giải thích ngắn gọn cách tối ưu hóa tuyến đường di chuyển trong ngày (VD: Đi các điểm cùng hướng phía Bắc để tránh đi ngược đường)")
 
 class ItineraryAgentResponse(BaseModel):
     daily_plans: List[DailyItinerary]
@@ -171,8 +168,7 @@ def call_itinerary_agent(
         generation_config={
             "response_mime_type": "application/json",
             "response_schema": ItineraryAgentResponse,
-            "max_output_tokens": 4096,
-            "temperature": 0.2
+            "max_output_tokens": 4096
         }
     )
     
@@ -235,8 +231,7 @@ def call_budget_agent(
         generation_config={
             "response_mime_type": "application/json",
             "response_schema": BudgetAgentGeminiResponse,
-            "max_output_tokens": 2048,
-            "temperature": 0.2
+            "max_output_tokens": 2048
         }
     )
     
