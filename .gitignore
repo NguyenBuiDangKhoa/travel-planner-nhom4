@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Environment files (chứa API Key - KHÔNG push lên GitHub)
+.env
+.env.local
+
+# Docker
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
