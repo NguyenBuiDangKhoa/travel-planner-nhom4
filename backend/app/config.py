@@ -9,6 +9,6 @@ class Settings:
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
     
     # Defaults
-    DEFAULT_MODEL: str = "gemini-2.5-flash"  # Flexible, cost-efficient, and fast for agentic workflows
+    DEFAULT_MODEL: str = "gemini-1.5-flash"  # Sử dụng 1.5-flash để có hạn mức Free Tier cao hơn (15 RPM / 1500 RPD)
 
 settings = Settings()
