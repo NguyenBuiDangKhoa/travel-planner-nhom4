@@ -39,8 +39,7 @@ def call_flight_agent(origin: str, destination: str, start_date: str, end_date: 
         model_name=settings.DEFAULT_MODEL,
         generation_config={
             "response_mime_type": "application/json",
-            "response_schema": FlightAgentResponse,
-            "max_output_tokens": 2048
+            "response_schema": FlightAgentResponse
         }
     )
     
@@ -77,8 +76,7 @@ def call_hotel_agent(destination: str, duration_days: int, budget: float, prefer
         model_name=settings.DEFAULT_MODEL,
         generation_config={
             "response_mime_type": "application/json",
-            "response_schema": HotelAgentResponse,
-            "max_output_tokens": 2048
+            "response_schema": HotelAgentResponse
         }
     )
     
@@ -112,8 +110,7 @@ def call_weather_agent(destination: str, start_date: str, duration_days: int) ->
         model_name=settings.DEFAULT_MODEL,
         generation_config={
             "response_mime_type": "application/json",
-            "response_schema": WeatherAgentResponse,
-            "max_output_tokens": 2048
+            "response_schema": WeatherAgentResponse
         }
     )
     
@@ -133,9 +130,9 @@ class Activity(BaseModel):
 class DailyItinerary(BaseModel):
     day: int = Field(description="Ngày thứ mấy (1, 2, 3...)")
     title: str = Field(description="Tiêu đề chính của ngày này (VD: Khám phá Trung tâm & Cafe lãng mạn)")
-    morning: List[Activity] = Field(description="Danh sách hoạt động buổi sáng")
-    afternoon: List[Activity] = Field(description="Danh sách hoạt động buổi chiều")
-    evening: List[Activity] = Field(description="Danh sách hoạt động buổi tối")
+    morning: List[Activity]
+    afternoon: List[Activity]
+    evening: List[Activity]
     route_optimization: str = Field(description="Giải thích ngắn gọn cách tối ưu hóa tuyến đường di chuyển trong ngày (VD: Đi các điểm cùng hướng phía Bắc để tránh đi ngược đường)")
 
 class ItineraryAgentResponse(BaseModel):
@@ -157,18 +154,14 @@ def call_itinerary_agent(
     - Điều kiện thời tiết: {weather_summary} (Nếu ngày nào mưa nhiều, hãy xếp hoạt động trong nhà, bảo tàng, cafe; ngày nắng ráo xếp hoạt động ngoài trời).
     - Sở thích hành khách: {preferences}.
     
-    Hãy đảm bảo:
-    1. Sinh đầy đủ lịch trình cho tất cả {duration_days} ngày từ Ngày 1 đến Ngày cuối.
-    2. Trong mỗi ngày, cung cấp chi tiết danh sách hoạt động cho cả 3 buổi: morning, afternoon, evening (không được để trống các danh sách này).
-    3. Đưa ra giải thích tối ưu hóa tuyến đường di chuyển (route_optimization).
+    Hãy đảm bảo lịch trình thực tế, có thời gian nghỉ ngơi, các điểm đến trong cùng một buổi sáng hoặc chiều phải gần nhau về mặt địa lý.
     """
     
     model = genai.GenerativeModel(
         model_name=settings.DEFAULT_MODEL,
         generation_config={
             "response_mime_type": "application/json",
-            "response_schema": ItineraryAgentResponse,
-            "max_output_tokens": 4096
+            "response_schema": ItineraryAgentResponse
         }
     )
     
@@ -230,8 +223,7 @@ def call_budget_agent(
         model_name=settings.DEFAULT_MODEL,
         generation_config={
             "response_mime_type": "application/json",
-            "response_schema": BudgetAgentGeminiResponse,
-            "max_output_tokens": 2048
+            "response_schema": BudgetAgentGeminiResponse
         }
     )
     
