@@ -9,6 +9,6 @@ class Settings:
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
     
     # Defaults
-    DEFAULT_MODEL: str = "gemini-flash-latest"  # Sử dụng gemini-flash-latest để có hạn mức Free Tier cao và tránh lỗi 404 v1beta
+    DEFAULT_MODEL: str = "gemini-2.5-flash"  # Flexible, cost-efficient, and fast for agentic workflows
 
 settings = Settings()
